@@ -4,7 +4,7 @@ import { promisify } from 'util'
 import { exec as realExec } from 'child_process'
 import { writeFileSync, stat } from 'fs'
 import { getReadlineInterface } from './utils'
-import { availableConfigs, type AvailableConfig } from './configs'
+import { configs, availableConfigs, type AvailableConfig } from './configs'
 import { packageManagers, type PackageManager, installPrefixes } from './package-managers'
 
 const exec = promisify(realExec)
@@ -20,7 +20,7 @@ function handleCreate() {
 
 	rl.question(`Which ESLint configuration do you want? [${configOptions}] `, (answer) => {
 		rl.close()
-		chooseConfig(answer)
+		chooseConfig(answer.toLowerCase())
 	})
 }
 
@@ -34,15 +34,16 @@ function chooseConfig(whichConfig: string) {
 					`Do you want to replace the current ${esLintFilename} file? [y,n] `,
 					(answer) => {
 						rl.close()
-						answer = answer.toLowerCase()
 
-						if (answer === 'y') {
+						const lowerCaseAnswer = answer.toLowerCase()
+
+						if (lowerCaseAnswer === 'y') {
 							configESLint(whichConfig as AvailableConfig)
-						} else if (answer === 'n') {
-							return
+						} else if (lowerCaseAnswer === 'n') {
+							process.exit(0)
 						} else {
 							console.error('❌ Please insert y or n')
-							return
+							process.exit(0)
 						}
 					}
 				)
@@ -62,7 +63,7 @@ async function configESLint(whichConfig: AvailableConfig) {
 }
 
 function createESLintConfig(whichConfig: AvailableConfig) {
-	const { config } = require(`./configs`)[whichConfig]
+	const { config } = configs[whichConfig]
 
 	const dataAsString = JSON.stringify(
 		config,
@@ -81,13 +82,13 @@ async function installDependencies(whichConfig: AvailableConfig) {
 
 	rl.question(
 		`Which package manager should be used? [${packageManagersOptions}] `,
-		(whichManager) => {
+		(whichManager): void => {
 			if (packageManagersOptions.includes(whichManager as PackageManager)) {
 				rl.close()
 
 				const installPrefix = installPrefixes[whichManager]
 
-				const { dependencies } = require(`./configs`)[whichConfig]
+				const { dependencies } = configs[whichConfig]
 				const dependenciesAsString = dependencies.join(' ')
 
 				const installCommand = `${installPrefix} ${dependenciesAsString}`
@@ -95,7 +96,7 @@ async function installDependencies(whichConfig: AvailableConfig) {
 				console.log(`\nInstalling dependencies...`)
 				console.log(`${installCommand}\n`)
 
-				return exec(
+				exec(
 					installCommand,
 					// @ts-ignore
 					(stdout: string, stderr: string) => {
@@ -110,7 +111,6 @@ async function installDependencies(whichConfig: AvailableConfig) {
 				)
 			} else {
 				console.log(`❌ ${whichConfig} is not available`)
-				process.exit(1)
 			}
 		}
 	)
