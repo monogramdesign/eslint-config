@@ -13,7 +13,8 @@ export const nextjs = {
 			'prettier'
 		],
 		rules: {
-			indent: 'off'
+			indent: 'off',
+			'react/jsx-filename-extension': [1, { extensions: ['.jsx', '.tsx'] }],
 		}
 	},
 	dependencies: ['eslint-config-prettier', 'eslint-config-airbnb', 'eslint-config-next']
