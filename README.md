@@ -1,6 +1,6 @@
-# prettier-config
+# eslint-config
 
-ESLint config used at Monogram
+ESLint config used at Monogram.
 
 ## Usage
 
