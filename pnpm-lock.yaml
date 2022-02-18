@@ -6,6 +6,7 @@ specifiers:
   eslint: ^8.2.0
   eslint-config-airbnb: ^19.0.4
   eslint-config-next: ^12.1.0
+  eslint-config-prettier: ^8.3.0
   eslint-plugin-import: ^2.25.3
   eslint-plugin-jsx-a11y: ^6.5.1
   eslint-plugin-react: ^7.28.0
@@ -19,6 +20,7 @@ devDependencies:
   eslint: 8.9.0
   eslint-config-airbnb: 19.0.4_cded826960a6a3d1bba2e72d77d93106
   eslint-config-next: 12.1.0_eslint@8.9.0+typescript@4.5.5
+  eslint-config-prettier: 8.3.0_eslint@8.9.0
   eslint-plugin-import: 2.25.4_eslint@8.9.0
   eslint-plugin-jsx-a11y: 6.5.1_eslint@8.9.0
   eslint-plugin-react: 7.28.0_eslint@8.9.0
@@ -553,6 +555,15 @@ packages:
       typescript: 4.5.5
     transitivePeerDependencies:
       - supports-color
+    dev: true
+
+  /eslint-config-prettier/8.3.0_eslint@8.9.0:
+    resolution: {integrity: sha512-BgZuLUSeKzvlL/VUjx/Yb787VQ26RU3gGjA3iiFvdsp/2bMfVIWUVP7tjxtjS0e+HP409cPlPvNkQloz8C91ew==}
+    hasBin: true
+    peerDependencies:
+      eslint: '>=7.0.0'
+    dependencies:
+      eslint: 8.9.0
     dev: true
 
   /eslint-import-resolver-node/0.3.6:

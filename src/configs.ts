@@ -16,5 +16,5 @@ export const nextjs = {
 			indent: 'off'
 		}
 	},
-	dependencies: ['eslint-config-airbnb', 'eslint-config-next']
+	dependencies: ['eslint-config-prettier', 'eslint-config-airbnb', 'eslint-config-next']
 }
