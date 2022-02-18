@@ -15,6 +15,7 @@ export const nextjs = {
 		rules: {
 			indent: 'off',
 			'react/jsx-filename-extension': [1, { extensions: ['.jsx', '.tsx'] }],
+			'jsx-a11y/anchor-is-valid': 'off' // TODO: enable this rule for anchors that are not within Next.js Link component
 		}
 	},
 	dependencies: ['eslint-config-prettier', 'eslint-config-airbnb', 'eslint-config-next']
