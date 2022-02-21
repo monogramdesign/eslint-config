@@ -13,7 +13,7 @@
 		"install-locally": "npm install -g",
 		"prepublish": "pnpm build",
 		"build": "tsc src/index.ts --outDir ./dist",
-		"run": "ts-node src/index.ts",
+		"start": "ts-node src/index.ts",
 		"release": "standard-version",
 		"prerelease": "standard-version --prerelease"
 	},
