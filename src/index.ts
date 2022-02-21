@@ -1,65 +1,60 @@
 #!/usr/bin/env node
-
-import { promisify } from 'util'
-import { exec as realExec } from 'child_process'
-import { writeFileSync, stat } from 'fs'
-import { getReadlineInterface } from './utils'
+import { writeFileSync } from 'fs'
+import { question, fileExists, exec, ESLINT_FILENAME, PROJECT_DIR } from './utils'
 import { configs, availableConfigs, type AvailableConfig } from './configs'
-import { packageManagers, type PackageManager, installPrefixes } from './package-managers'
+import {
+	packageManagers,
+	type PackageManager,
+	installPrefixes,
+	findPackageManager
+} from './package-managers'
 
-const exec = promisify(realExec)
+// check if ESLint file already exists to prevent unwanted overwrites
+if (fileExists(`${PROJECT_DIR}/${ESLINT_FILENAME}`)) {
+	question(`\nDo you want to replace the current ${ESLINT_FILENAME} file? \n[y,n] `).then(
+		(answer) => {
+			const shouldReplaceCurrentConfig = answer?.toLowerCase() === 'y'
 
-const esLintFilename = '.eslintrc'
-const projectDir = process.cwd()
-
-handleCreate()
-
-function handleCreate() {
-	const rl = getReadlineInterface()
-	const configOptions = availableConfigs.join(', ')
-
-	rl.question(`Which ESLint configuration do you want? [${configOptions}] `, (answer) => {
-		rl.close()
-		chooseConfig(answer.toLowerCase())
-	})
+			if (shouldReplaceCurrentConfig) {
+				handleCreate()
+			}
+		}
+	)
 }
 
-function chooseConfig(whichConfig: string) {
-	if (availableConfigs.includes(whichConfig as AvailableConfig)) {
-		stat(`${projectDir}/${esLintFilename}`, (error, stats) => {
-			if (stats) {
-				const rl = getReadlineInterface()
+async function handleCreate() {
+	const config = await chooseConfig()
 
-				rl.question(
-					`Do you want to replace the current ${esLintFilename} file? [y,n] `,
-					(answer) => {
-						rl.close()
+	if (config) {
+		const packageManager = await choosePackageManager()
 
-						const lowerCaseAnswer = answer.toLowerCase()
-
-						if (lowerCaseAnswer === 'y') {
-							configESLint(whichConfig as AvailableConfig)
-						} else if (lowerCaseAnswer === 'n') {
-							process.exit(0)
-						} else {
-							console.error('❌ Please insert y or n')
-							process.exit(0)
-						}
-					}
-				)
-			} else {
-				configESLint(whichConfig as AvailableConfig)
-			}
-		})
+		if (packageManager) {
+			createESLintConfig(config)
+			await installDependencies(config, packageManager)
+		} else {
+			console.log(`❌ Package manager not available`)
+		}
 	} else {
-		console.log(`❌ ${whichConfig} is not available`)
+		console.log(`❌ Configuration not available`)
 	}
 }
 
-async function configESLint(whichConfig: AvailableConfig) {
-	createESLintConfig(whichConfig)
+async function chooseConfig(): Promise<AvailableConfig | null> {
+	let config: AvailableConfig | null = null
 
-	await installDependencies(whichConfig)
+	const configOptions = availableConfigs.join(', ')
+
+	const chosenConfig = await question(
+		`\nWhich ESLint configuration do you want to install? \n[${configOptions}] `
+	)
+
+	if (availableConfigs.includes(chosenConfig as AvailableConfig)) {
+		config = chosenConfig as AvailableConfig
+	} else {
+		config = chosenConfig as AvailableConfig
+	}
+
+	return config
 }
 
 function createESLintConfig(whichConfig: AvailableConfig) {
@@ -71,47 +66,53 @@ function createESLintConfig(whichConfig: AvailableConfig) {
 		2 // TODO : get config from prettier
 	)
 
-	writeFileSync(`${projectDir}/.eslintrc`, dataAsString)
+	writeFileSync(`${PROJECT_DIR}/.eslintrc`, dataAsString)
 
-	console.log(`\n✅ ESLint configuration file created at ${projectDir}/${esLintFilename}\n`)
+	console.log(`\n✅ ESLint configuration file created at ${PROJECT_DIR}/${ESLINT_FILENAME}`)
 }
 
-async function installDependencies(whichConfig: AvailableConfig) {
-	const rl = getReadlineInterface()
-	const packageManagersOptions = packageManagers.join(', ')
+async function choosePackageManager() {
+	let packageManager = findPackageManager()
 
-	rl.question(
-		`Which package manager should be used? [${packageManagersOptions}] `,
-		(whichManager): void => {
-			if (packageManagersOptions.includes(whichManager as PackageManager)) {
-				rl.close()
+	if (packageManager) {
+		console.log(`📦 An existing ${packageManager} installation was found`)
+	} else {
+		const packageManagersOptions = packageManagers.join(', ')
 
-				const installPrefix = installPrefixes[whichManager]
+		const chosenManager = await question(
+			`Which package manager should be used? \n[${packageManagersOptions}] `
+		)
 
-				const { dependencies } = configs[whichConfig]
-				const dependenciesAsString = dependencies.join(' ')
+		if (packageManagersOptions.includes(chosenManager as PackageManager)) {
+			packageManager = chosenManager as PackageManager
+		}
+	}
 
-				const installCommand = `${installPrefix} ${dependenciesAsString}`
+	return packageManager
+}
 
-				console.log(`\nInstalling dependencies...`)
-				console.log(`${installCommand}\n`)
+async function installDependencies(config: AvailableConfig, packageManager: PackageManager) {
+	const installPrefix = installPrefixes[packageManager]
 
-				exec(
-					installCommand,
-					// @ts-ignore
-					(stdout: string, stderr: string) => {
-						if (stderr) {
-							console.error(stderr)
-						} else {
-							console.log(stdout)
-						}
+	const { dependencies } = configs[config]
+	const dependenciesAsString = dependencies.join(' ')
 
-						Promise.resolve({ stdout, stderr })
-					}
-				)
+	const installCommand = `${installPrefix} ${dependenciesAsString}`
+
+	console.log(`📦 Installing dependencies...`)
+	console.log(`${installCommand}\n`)
+
+	await exec(
+		installCommand,
+		// @ts-ignore
+		(stdout: string, stderr: string) => {
+			if (stderr) {
+				console.error(stderr)
 			} else {
-				console.log(`❌ ${whichConfig} is not available`)
+				console.log(stdout)
 			}
+
+			Promise.resolve({ stdout, stderr })
 		}
 	)
 }

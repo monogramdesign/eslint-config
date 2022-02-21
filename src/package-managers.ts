@@ -1,3 +1,5 @@
+import { fileExists, PROJECT_DIR } from './utils'
+
 export const packageManagers = ['yarn', 'pnpm', 'npm'] as const
 
 export type PackageManagers = typeof packageManagers
@@ -8,3 +10,19 @@ export const installPrefixes = {
 	pnpm: 'pnpm i -D',
 	npm: 'npm i -D'
 } as const
+
+export const lockFiles = {
+	yarn: `${PROJECT_DIR}/yarn.lock`,
+	pnpm: `${PROJECT_DIR}/pnpm-lock.yaml`,
+	npm: `${PROJECT_DIR}/package-lock.json`
+}
+
+export function findPackageManager(): PackageManager | null {
+	const found = packageManagers.find((pkg: PackageManager) => {
+		if (fileExists(lockFiles[pkg as PackageManager])) return pkg
+
+		return null
+	})
+
+	return found as PackageManager | null
+}
