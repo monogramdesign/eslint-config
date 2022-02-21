@@ -1,6 +1,7 @@
 lockfileVersion: 5.3
 
 specifiers:
+  '@commitlint/types': ^16.2.1
   '@monogram/prettier-config': ^0.0.8
   '@types/node': ^17.0.18
   '@typescript-eslint/eslint-plugin': ^5.12.0
@@ -12,10 +13,12 @@ specifiers:
   eslint-plugin-jsx-a11y: ^6.5.1
   eslint-plugin-react: ^7.28.0
   eslint-plugin-react-hooks: ^4.3.0
+  husky: ^7.0.4
   ts-node: ^10.5.0
   typescript: ^4.5.5
 
 devDependencies:
+  '@commitlint/types': 16.2.1
   '@monogram/prettier-config': 0.0.8
   '@types/node': 17.0.18
   '@typescript-eslint/eslint-plugin': 5.12.0_c467cf9bb49b295941e83ce479a578b7
@@ -27,6 +30,7 @@ devDependencies:
   eslint-plugin-jsx-a11y: 6.5.1_eslint@8.9.0
   eslint-plugin-react: 7.28.0_eslint@8.9.0
   eslint-plugin-react-hooks: 4.3.0_eslint@8.9.0
+  husky: 7.0.4
   ts-node: 10.5.0_f3bd4037939c2ed2942ba074291f8ef2
   typescript: 4.5.5
 
@@ -45,6 +49,13 @@ packages:
     engines: {node: '>=6.9.0'}
     dependencies:
       regenerator-runtime: 0.13.9
+    dev: true
+
+  /@commitlint/types/16.2.1:
+    resolution: {integrity: sha512-7/z7pA7BM0i8XvMSBynO7xsB3mVQPUZbVn6zMIlp/a091XJ3qAXRXc+HwLYhiIdzzS5fuxxNIHZMGHVD4HJxdA==}
+    engines: {node: '>=v12'}
+    dependencies:
+      chalk: 4.1.2
     dev: true
 
   /@cspotcode/source-map-consumer/0.8.0:
@@ -969,6 +980,12 @@ packages:
     engines: {node: '>= 0.4.0'}
     dependencies:
       function-bind: 1.1.1
+    dev: true
+
+  /husky/7.0.4:
+    resolution: {integrity: sha512-vbaCKN2QLtP/vD4yvs6iz6hBEo6wkSzs8HpRah1Z6aGmF2KW5PdYuAd7uX5a+OyBZHBhd+TFLqgjUgytQr4RvQ==}
+    engines: {node: '>=12'}
+    hasBin: true
     dev: true
 
   /ignore/4.0.6:
