@@ -12,7 +12,8 @@
 		"update-local": "pnpm build && pnpm install-locally",
 		"install-locally": "npm install -g",
 		"prepublish": "pnpm build",
-		"build": "tsc src/index.ts --outDir ./dist"
+		"build": "tsc src/index.ts --outDir ./dist",
+		"run": "ts-node src/index.ts"
 	},
 	"main": "dist/index.js",
 	"bin": {
