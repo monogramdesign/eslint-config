@@ -13,7 +13,9 @@
 		"install-locally": "npm install -g",
 		"prepublish": "pnpm build",
 		"build": "tsc src/index.ts --outDir ./dist",
-		"run": "ts-node src/index.ts"
+		"run": "ts-node src/index.ts",
+		"release": "standard-version",
+		"prerelease": "standard-version --prerelease"
 	},
 	"main": "dist/index.js",
 	"bin": {
@@ -33,6 +35,7 @@
 		"eslint-plugin-react": "^7.28.0",
 		"eslint-plugin-react-hooks": "^4.3.0",
 		"husky": "^7.0.4",
+		"standard-version": "^9.3.2",
 		"ts-node": "^10.5.0",
 		"typescript": "^4.5.5"
 	},
