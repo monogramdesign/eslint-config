@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { writeFileSync } from 'fs'
-import { question, fileExists, exec, ESLINT_FILENAME, PROJECT_DIR } from './utils'
+import { question, fileExists, exec, ESLINT_FILENAME } from './utils'
 import { configs, availableConfigs, type AvailableConfig } from './configs'
 import {
 	packageManagers,
@@ -10,7 +10,7 @@ import {
 } from './package-managers'
 
 // check if ESLint file already exists to prevent unwanted overwrites
-if (fileExists(`${PROJECT_DIR}/${ESLINT_FILENAME}`)) {
+if (fileExists(`${process.cwd()}/${ESLINT_FILENAME}`)) {
 	question(`\nDo you want to replace the current ${ESLINT_FILENAME} file? \n[y,n] `).then(
 		(answer) => {
 			const shouldReplaceCurrentConfig = answer?.toLowerCase() === 'y'
@@ -63,12 +63,12 @@ function createESLintConfig(whichConfig: AvailableConfig) {
 	const dataAsString = JSON.stringify(
 		config,
 		null,
-		2 // TODO : get config from prettier
+		2 // TODO: get config from prettier
 	)
 
-	writeFileSync(`${PROJECT_DIR}/.eslintrc`, dataAsString)
+	writeFileSync(`${process.cwd()}/.eslintrc`, dataAsString)
 
-	console.log(`\n✅ ESLint configuration file created at ${PROJECT_DIR}/${ESLINT_FILENAME}`)
+	console.log(`\n✅ ESLint configuration file created at ${process.cwd()}/${ESLINT_FILENAME}`)
 }
 
 async function choosePackageManager() {

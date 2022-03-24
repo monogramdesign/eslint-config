@@ -1,4 +1,4 @@
-import { fileExists, PROJECT_DIR } from './utils'
+import { fileExists } from './utils'
 
 export const packageManagers = ['yarn', 'pnpm', 'npm'] as const
 
@@ -12,9 +12,9 @@ export const installPrefixes = {
 } as const
 
 export const lockFiles = {
-	yarn: `${PROJECT_DIR}/yarn.lock`,
-	pnpm: `${PROJECT_DIR}/pnpm-lock.yaml`,
-	npm: `${PROJECT_DIR}/package-lock.json`
+	yarn: `${process.cwd()}/yarn.lock`,
+	pnpm: `${process.cwd()}/pnpm-lock.yaml`,
+	npm: `${process.cwd()}/package-lock.json`
 }
 
 export function findPackageManager(): PackageManager | null {
