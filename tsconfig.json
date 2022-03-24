@@ -1,0 +1,9 @@
+{
+	"compilerOptions": {
+		"esModuleInterop": true,
+		"outDir": "./dist",
+		"rootDir": "./src",
+		"module": "commonjs",
+		"baseUrl": "."
+	}
+}
