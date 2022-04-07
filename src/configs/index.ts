@@ -5,6 +5,7 @@ export const configs = {
 		config: nextJsConfig,
 		dependencies: [
 			'eslint',
+			'eslint-config-next',
 			'eslint-config-prettier',
 			'eslint-config-airbnb',
 			'eslint-plugin-import',
