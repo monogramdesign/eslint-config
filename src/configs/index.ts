@@ -20,7 +20,7 @@ export const configs = {
 		dependencies: [
 			'eslint',
 			'eslint-config-prettier',
-			'eslint-config-airbnb',
+			'eslint-config-airbnb-base',
 			'eslint-plugin-import',
 			'eslint-import-resolver-typescript',
 			'@typescript-eslint/eslint-plugin',

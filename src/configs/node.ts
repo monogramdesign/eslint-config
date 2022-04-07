@@ -11,7 +11,12 @@ const config = {
 			}
 		}
 	},
-	extends: ['airbnb', 'eslint:recommended', 'plugin:@typescript-eslint/recommended', 'prettier'],
+	extends: [
+		'airbnb-base',
+		'eslint:recommended',
+		'plugin:@typescript-eslint/recommended',
+		'prettier'
+	],
 	rules: {
 		indent: 'off',
 		'no-use-before-define': 'off',
