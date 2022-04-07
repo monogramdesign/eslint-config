@@ -9,8 +9,10 @@ import {
 	findPackageManager
 } from './package-managers'
 
+const configFileAlreadyExists = fileExists(`${process.cwd()}/${ESLINT_FILENAME}`)
+
 // check if ESLint file already exists to prevent unwanted overwrites
-if (fileExists(`${process.cwd()}/${ESLINT_FILENAME}`)) {
+if (configFileAlreadyExists) {
 	question(`\nDo you want to replace the current ${ESLINT_FILENAME} file? \n[y,n] `).then(
 		(answer) => {
 			const shouldReplaceCurrentConfig = answer?.toLowerCase() === 'y'
@@ -20,6 +22,8 @@ if (fileExists(`${process.cwd()}/${ESLINT_FILENAME}`)) {
 			}
 		}
 	)
+} else {
+	handleCreate()
 }
 
 async function handleCreate() {
