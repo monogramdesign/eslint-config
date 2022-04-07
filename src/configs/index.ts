@@ -1,4 +1,5 @@
 import nextJsConfig from './nextjs'
+import nodeConfig from './node'
 
 export const configs = {
 	nextjs: {
@@ -6,6 +7,18 @@ export const configs = {
 		dependencies: [
 			'eslint',
 			'eslint-config-next',
+			'eslint-config-prettier',
+			'eslint-config-airbnb',
+			'eslint-plugin-import',
+			'eslint-import-resolver-typescript',
+			'@typescript-eslint/eslint-plugin',
+			'@typescript-eslint/parser'
+		]
+	},
+	node: {
+		config: nodeConfig,
+		dependencies: [
+			'eslint',
 			'eslint-config-prettier',
 			'eslint-config-airbnb',
 			'eslint-plugin-import',
