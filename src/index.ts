@@ -66,16 +66,16 @@ function createESLintConfig(whichConfig: AvailableConfig) {
 		2 // TODO: get config from prettier
 	)
 
-	writeFileSync(`${process.cwd()}/.eslintrc`, dataAsString)
+	writeFileSync(`${process.cwd()}/${ESLINT_FILENAME}`, `module.exports = ${dataAsString}`)
 
-	console.log(`\n✅ ESLint configuration file created at ${process.cwd()}/${ESLINT_FILENAME}`)
+	console.log(`✅ ESLint configuration file created at ${process.cwd()}/${ESLINT_FILENAME}`)
 }
 
 async function choosePackageManager() {
 	let packageManager = findPackageManager()
 
 	if (packageManager) {
-		console.log(`📦 An existing ${packageManager} installation was found`)
+		console.log(`\n📦 An existing ${packageManager} installation was found`)
 	} else {
 		const packageManagersOptions = packageManagers.join(', ')
 
