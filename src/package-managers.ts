@@ -7,7 +7,7 @@ export type PackageManager = typeof packageManagers[number]
 
 export const installPrefixes = {
 	yarn: 'yarn add -D',
-	pnpm: 'pnpm i -D',
+	pnpm: 'pnpm add -D',
 	npm: 'npm i -D'
 } as const
 
@@ -19,7 +19,7 @@ export const lockFiles = {
 
 export function findPackageManager(): PackageManager | null {
 	const found = packageManagers.find((pkg: PackageManager) => {
-		if (fileExists(lockFiles[pkg as PackageManager])) return pkg
+		if (fileExists(lockFiles[pkg])) return pkg
 
 		return null
 	})
