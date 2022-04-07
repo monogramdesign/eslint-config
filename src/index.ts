@@ -108,6 +108,7 @@ async function installDependencies(config: AvailableConfig, packageManager: Pack
 
 	await exec(
 		installCommand,
+		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 		// @ts-ignore
 		(stdout: string, stderr: string) => {
 			if (stderr) {
