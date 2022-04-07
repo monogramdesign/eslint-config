@@ -1,6 +1,6 @@
 {
 	"name": "@monogram/eslint-config",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"description": "ESLint configs used at Monogram",
 	"keywords": [
 		"eslint",
