@@ -11,11 +11,10 @@
 	"scripts": {
 		"update-local": "pnpm build && pnpm install-locally",
 		"install-locally": "npm install -g",
-		"prepublish": "pnpm build",
+		"prepublish": "pnpm build && pnpm release",
 		"build": "tsc --project tsconfig.json",
 		"start": "ts-node src/index.ts",
-		"release": "standard-version",
-		"prerelease": "standard-version --prerelease"
+		"release": "standard-version"
 	},
 	"main": "dist/index.js",
 	"bin": {
