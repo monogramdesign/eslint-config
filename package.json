@@ -21,6 +21,9 @@
 	"bin": {
 		"eslint-config": "dist/index.js"
 	},
+	"files": [
+		"dist"
+	],
 	"devDependencies": {
 		"@monogram/prettier-config": "^0.0.8",
 		"@types/node": "^17.0.18",
