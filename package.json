@@ -24,6 +24,9 @@
 		"dist"
 	],
 	"devDependencies": {
+		"@commitlint/cli": "^17.0.3",
+		"@commitlint/config-conventional": "^17.0.3",
+		"@commitlint/types": "^16.2.1",
 		"@monogram/prettier-config": "^0.0.8",
 		"@types/node": "^17.0.18",
 		"@typescript-eslint/eslint-plugin": "^5.18.0",
