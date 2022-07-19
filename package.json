@@ -13,8 +13,10 @@
 		"install-locally": "npm install -g",
 		"prepublish": "pnpm build && pnpm release",
 		"build": "tsc --project tsconfig.json",
+		"prestart": "pnpm build",
 		"start": "ts-node src/index.ts",
-		"release": "standard-version"
+		"release": "standard-version",
+		"postinstall": "pnpm build"
 	},
 	"main": "dist/index.js",
 	"bin": {
