@@ -33,7 +33,13 @@ const config = {
 		'import/extensions': 'off',
 		'@typescript-eslint/ban-ts-comment': 'off',
 		'react/jsx-filename-extension': [1, { extensions: ['.tsx'] }],
-		'react/jsx-props-no-spreading': 'off'
+		'react/jsx-props-no-spreading': 'off',
+		'@typescript-eslint/consistent-type-imports': 'error',
+		'react/no-multi-comp': 'error',
+		'no-restricted-syntax': ['error', 'ForInStatement', 'LabeledStatement', 'WithStatement'],
+		'react/prop-types': 'off', // Since we do not use prop-types
+		'react/require-default-props': 'off', // Since we do not use prop-types
+		'no-plusplus': [2, { allowForLoopAfterthoughts: true }] // allow ++ only in for loops
 	}
 }
 
