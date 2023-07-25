@@ -20,7 +20,7 @@ Install dependencies
 npm i -D eslint @monogram/eslint-config
 ```
 
-Add the following to a `.eslintrc.js` file, while replacing ENVIRONMENT wih the name of a supported environment
+Add the following to a `.eslintrc.js` file, while replacing ENVIRONMENT with the name of a supported environment
 
 ```js
 module.exports = {
