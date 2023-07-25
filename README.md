@@ -4,8 +4,32 @@ ESLint config used at Monogram.
 
 ## Usage
 
-Run the configuration with the following command:
+### Automatic
+
+Run the following command and follow the prompts.
 
 ```sh
 npx @monogram/eslint-config
 ```
+
+### Manual
+
+Install dependencies
+
+```sh
+npm i -D eslint @monogram/eslint-config
+```
+
+Add the following to a `.eslintrc.js` file, while replacing ENVIRONMENT wih the name of a supported environment
+
+```js
+module.exports = {
+	extends: ['@monogram/eslint-config/ENVIRONMENT']
+}
+```
+
+## Supported Environments
+
+- [node]("./node.js")
+- [next]("./next.js")
+- svelte _(coming soon)_

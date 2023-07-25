@@ -1,4 +1,4 @@
-const config = {
+module.exports = {
 	parser: '@typescript-eslint/parser',
 	plugins: ['@typescript-eslint', 'import'],
 	settings: {
@@ -29,5 +29,3 @@ const config = {
 		'import/extensions': 'off'
 	}
 }
-
-export default config

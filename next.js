@@ -1,4 +1,4 @@
-const config = {
+module.exports = {
 	parser: '@typescript-eslint/parser',
 	plugins: ['@typescript-eslint', 'import'],
 	settings: {
@@ -11,15 +11,13 @@ const config = {
 			}
 		}
 	},
-
 	extends: [
+		'next/core-web-vitals',
 		'airbnb',
-		'airbnb/hooks',
+		// "airbnb/hooks", // conflicts with next/core-web-vitals
 		'eslint:recommended',
 		'plugin:@typescript-eslint/recommended',
-		'next', // = eslint-plugin-react / eslint-plugin-react-hooks / eslint-plugin-next
-		'next/core-web-vitals',
-		'prettier'
+		'eslint-config-prettier'
 	],
 	rules: {
 		indent: 'off',
@@ -37,10 +35,9 @@ const config = {
 		'@typescript-eslint/consistent-type-imports': 'error',
 		'react/no-multi-comp': 'error',
 		'no-restricted-syntax': ['error', 'ForInStatement', 'LabeledStatement', 'WithStatement'],
-		'react/prop-types': 'off', // Since we do not use prop-types
-		'react/require-default-props': 'off', // Since we do not use prop-types
-		'no-plusplus': [2, { allowForLoopAfterthoughts: true }] // allow ++ only in for loops
+		'react/prop-types': 'off',
+		'react/require-default-props': 'off',
+		'no-plusplus': [2, { allowForLoopAfterthoughts: true }],
+		'react/react-in-jsx-scope': 'off' // not needed in next.js
 	}
 }
-
-export default config

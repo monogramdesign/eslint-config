@@ -26,6 +26,7 @@ module.exports = {
 				allowElseIf: true
 			}
 		],
-		'import/extensions': 'off'
+		'import/extensions': 'off',
+		'no-console': 'off'
 	}
 }
