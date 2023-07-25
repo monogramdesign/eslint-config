@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-import { existsSync, writeFileSync } from 'fs'
-import { execSync } from 'child_process'
+import { existsSync, writeFileSync } from 'node:fs'
+import { execSync } from 'node:child_process'
 import prompts from 'prompts'
 
 const ESLINT_FILENAME = '.eslintrc.js' 
@@ -49,7 +49,7 @@ async function chooseConfig(): Promise<AvailableConfig> {
 function createESLintConfig(whichConfig: AvailableConfig) {
 	const dataAsString = JSON.stringify(
 		{
-      extends: `jbm-testing/${whichConfig}`
+      extends: `@monogram/eslint-config/${whichConfig}`
     },
 		null,
 		2 
@@ -82,7 +82,7 @@ const installPrefixes = {
 async function installDependency(packageManager: PackageManager) {
 	const installPrefix = installPrefixes[packageManager]
 
-	const installCommand = `${installPrefix} eslint eslint-config-jbm-testing`
+	const installCommand = `${installPrefix} eslint @monogram/eslint-config`
 
 	console.log(`📦 Installing dependencies...`)
 
