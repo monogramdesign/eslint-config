@@ -33,3 +33,8 @@ module.exports = {
 - [node]("./node.js")
 - [next]("./next.js")
 - svelte _(coming soon)_
+
+## TODO
+
+- re-integrate [commit-lint](https://commitlint.js.org/) and husky pre-commit hooks
+- reintegrate CHANGELOG.md versioning through [release-please](https://github.com/googleapis/release-please) since `standard-version` is deprecated
