@@ -20,11 +20,11 @@ Install dependencies
 npm i -D eslint @monogram/eslint-config
 ```
 
-Add the following to a `.eslintrc.js` file, while replacing ENVIRONMENT with the name of a supported environment
+Add the following to a `.eslintrc.js` file, while replacing `ENVIRONMENT` with the name of a supported environment
 
 ```js
 module.exports = {
-	extends: ['@monogram/eslint-config/ENVIRONMENT']
+	extends: ['@monogram/eslint-config/<ENVIRONMENT>']
 }
 ```
 
@@ -36,5 +36,4 @@ module.exports = {
 
 ## TODO
 
-- re-integrate [commit-lint](https://commitlint.js.org/) and husky pre-commit hooks
-- reintegrate CHANGELOG.md versioning through [release-please](https://github.com/googleapis/release-please) since `standard-version` is deprecated
+- integrate [release-please](https://github.com/googleapis/release-please) since `standard-version` is deprecated

@@ -35,9 +35,9 @@ module.exports = {
 		'@typescript-eslint/consistent-type-imports': 'error',
 		'react/no-multi-comp': 'error',
 		'no-restricted-syntax': ['error', 'ForInStatement', 'LabeledStatement', 'WithStatement'],
-		'react/prop-types': 'off',
-		'react/require-default-props': 'off',
-		'no-plusplus': [2, { allowForLoopAfterthoughts: true }],
+		'react/prop-types': 'off', // Since we do not use prop-types
+		'react/require-default-props': 'off', // Since we do not use prop-types
+		'no-plusplus': [2, { allowForLoopAfterthoughts: true }], // allow ++ only in for loops
 		'react/react-in-jsx-scope': 'off' // not needed in next.js
 	}
 }

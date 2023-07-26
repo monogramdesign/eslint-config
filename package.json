@@ -1,30 +1,38 @@
 {
 	"name": "@monogram/eslint-config",
-	"version": "0.2.0",
+	"version": "0.1.2",
 	"description": "ESLint configs used at Monogram",
 	"keywords": [
-		"eslint",
-		"eslintconfig",
-		"eslint-config"
+		"eslint-config",
+		"nodejs",
+		"nextjs"
 	],
 	"license": "MIT",
 	"scripts": {
-		"install-locally": "pnpm build && npm install -g",
-		"prepublish": "pnpm build",
-		"build": "tsc"
+		"postinstall": "pnpm build",
+		"build": "tsc",
+		"prepublish": "pnpm build && pnpm release",
+		"release": "standard-version"
 	},
-	"main": "build/index.js",
-	"bin": "build/index.js",
+	"main": "./dist/index.js",
+	"bin": "./dist/index.js",
+	"files": [
+		"dist",
+		"next.js",
+		"node.js"
+	],
 	"devDependencies": {
 		"@commitlint/cli": "^17.6.7",
 		"@commitlint/config-conventional": "^17.6.7",
 		"@commitlint/types": "^17.4.4",
 		"@monogram/prettier-config": "^0.2.0",
+		"@types/inquirer": "^9.0.3",
 		"@types/node": "^20.4.5",
-		"@types/prompts": "^2.4.4",
+		"husky": "^8.0.3",
 		"typescript": "^5.1.6"
 	},
 	"dependencies": {
+		"@inquirer/prompts": "^3.0.0",
 		"@typescript-eslint/eslint-plugin": "^6.1.0",
 		"@typescript-eslint/parser": "6.1.0",
 		"eslint-config-airbnb": "^19.0.4",
@@ -32,8 +40,7 @@
 		"eslint-config-next": "^13.4.11",
 		"eslint-config-prettier": "^8.8.0",
 		"eslint-import-resolver-typescript": "^3.5.5",
-		"eslint-plugin-import": "^2.27.5",
-		"prompts": "^2.4.2"
+		"eslint-plugin-import": "^2.27.5"
 	},
 	"prettier": "@monogram/prettier-config",
 	"repository": {
@@ -41,8 +48,8 @@
 		"url": "git+https://github.com/monogramdesign/eslint-config.git"
 	},
 	"contributors": [
-		"Julien Martel",
-		"Leonardo Ortiz"
+		"Leonardo Ortiz",
+		"Julien Martel"
 	],
 	"bugs": {
 		"url": "https://github.com/monogramdesign/eslint-config/issues"
