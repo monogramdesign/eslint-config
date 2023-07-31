@@ -19,7 +19,7 @@ module.exports = {
 	],
 	rules: {
 		indent: 'off',
-		'@typescript-eslint/consistent-type-imports': ['error', { fixStyle: 'inline-type-imports' }],
+		'@typescript-eslint/consistent-type-imports': 'error',
 		'no-use-before-define': 'off',
 		'no-else-return': [
 			'error',

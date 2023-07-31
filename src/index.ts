@@ -2,15 +2,9 @@
 import { existsSync, writeFileSync } from 'node:fs'
 import { execSync } from 'node:child_process'
 import { select, confirm } from '@inquirer/prompts'
-import {
-	type PackageManager,
-	type AvailableConfig,
-	AVAILABLE_CONFIGS,
-	ESLINT_FILENAME,
-	PACKAGE_NAME,
-	INSTALL_PREFIXES
-} from './constants'
+import { AVAILABLE_CONFIGS, ESLINT_FILENAME, PACKAGE_NAME, INSTALL_PREFIXES } from './constants'
 import { choosePackageManager } from './package-manager'
+import type { AvailableConfig, PackageManager } from './types'
 
 if (existsSync(`${process.cwd()}/${ESLINT_FILENAME}`)) {
 	confirm({ message: `Do you want to replace the current ${ESLINT_FILENAME} file?` }).then(
