@@ -17,7 +17,7 @@ npx @monogram/eslint-config
 Install dependencies
 
 ```sh
-npm i -D eslint @monogram/eslint-config
+pnpm add -D eslint @monogram/eslint-config
 ```
 
 Add the following to a `.eslintrc.js` file, while replacing `ENVIRONMENT` with the name of a supported environment
@@ -33,7 +33,3 @@ module.exports = {
 - [Node.js]("./node.js")
 - [Next.js]("./next.js")
 - Svelte _(coming soon)_
-
-## TODO
-
-- integrate [release-please](https://github.com/googleapis/release-please) since `standard-version` is deprecated

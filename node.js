@@ -19,6 +19,7 @@ module.exports = {
 	],
 	rules: {
 		indent: 'off',
+		'@typescript-eslint/consistent-type-imports': ['error', { fixStyle: 'inline-type-imports' }],
 		'no-use-before-define': 'off',
 		'no-else-return': [
 			'error',
@@ -26,6 +27,7 @@ module.exports = {
 				allowElseIf: true
 			}
 		],
-		'import/extensions': 'off'
+		'import/extensions': 'off',
+		'import/prefer-default-export': 'off'
 	}
 }

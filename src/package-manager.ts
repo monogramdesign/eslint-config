@@ -1,8 +1,8 @@
 import { existsSync } from 'node:fs'
 import { select, confirm } from '@inquirer/prompts'
-import { PackageManager, LOCK_FILES, PACKAGE_MANAGERS } from './constants'
+import { type PackageManager, LOCK_FILES, PACKAGE_MANAGERS } from './constants'
 
-export default async function choosePackageManager(): Promise<PackageManager> {
+export async function choosePackageManager(): Promise<PackageManager> {
 	const packageManager = findPackageManager()
 
 	if (packageManager === undefined) {
