@@ -1,32 +1,35 @@
-import { existsSync } from "node:fs"
-import { select, confirm } from "@inquirer/prompts"
-import { PackageManager, lockFiles, packageManagers } from "./constants"
+import { existsSync } from 'node:fs'
+import { select, confirm } from '@inquirer/prompts'
+import { PackageManager, LOCK_FILES, PACKAGE_MANAGERS } from './constants'
 
 export default async function choosePackageManager(): Promise<PackageManager> {
-	const pm = findPackageManager()
+	const packageManager = findPackageManager()
 
-	if (pm === undefined) {
+	if (packageManager === undefined) {
 		return selectPackageManager()
 	}
 
-	const usePm = await confirm({ message: `Auto-detected package manager. Use ${pm} for installation?`, default: true })
+	const useAutoDetected = await confirm({
+		message: `Auto-detected package manager. Use ${packageManager} for installation?`,
+		default: true
+	})
 
-	if (usePm === false) {
+	if (useAutoDetected === false) {
 		return selectPackageManager()
 	}
 
-	return pm
+	return packageManager
 }
 
 function findPackageManager(): PackageManager | undefined {
-	return packageManagers.find((pm) => existsSync(lockFiles[pm]))
+	return PACKAGE_MANAGERS.find((packageManager) => existsSync(LOCK_FILES[packageManager]))
 }
 
 function selectPackageManager() {
 	return select({
 		message: 'Select a package manager you would like to use for the install',
-		choices: packageManagers.map((pm) => ({
-			value: pm
-		})),
-	});
+		choices: PACKAGE_MANAGERS.map((packageManager) => ({
+			value: packageManager
+		}))
+	})
 }

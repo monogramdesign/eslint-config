@@ -14,7 +14,6 @@ module.exports = {
 	extends: [
 		'next/core-web-vitals',
 		'airbnb',
-		// "airbnb/hooks", // conflicts with next/core-web-vitals
 		'eslint:recommended',
 		'plugin:@typescript-eslint/recommended',
 		'eslint-config-prettier'

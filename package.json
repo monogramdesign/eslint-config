@@ -12,7 +12,8 @@
 		"postinstall": "pnpm build",
 		"build": "tsc",
 		"prepublish": "pnpm build && pnpm release",
-		"release": "standard-version"
+		"release": "standard-version",
+		"prepare": "husky install"
 	},
 	"main": "./dist/index.js",
 	"bin": "./dist/index.js",

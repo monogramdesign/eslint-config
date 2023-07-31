@@ -30,9 +30,9 @@ module.exports = {
 
 ## Supported Environments
 
-- [node]("./node.js")
-- [next]("./next.js")
-- svelte _(coming soon)_
+- [Node.js]("./node.js")
+- [Next.js]("./next.js")
+- Svelte _(coming soon)_
 
 ## TODO
 
