@@ -11,6 +11,7 @@
 	"scripts": {
 		"postinstall": "pnpm build",
 		"build": "tsc",
+		"lint": "eslint",
 		"prepublish": "pnpm build && pnpm release",
 		"release": "standard-version",
 		"prepare": "husky install"
@@ -29,6 +30,7 @@
 		"@monogram/prettier-config": "^0.2.0",
 		"@types/inquirer": "^9.0.3",
 		"@types/node": "^20.4.5",
+		"eslint": "^8.46.0",
 		"husky": "^8.0.3",
 		"standard-version": "^9.5.0",
 		"typescript": "^5.1.6"
