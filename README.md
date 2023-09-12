@@ -1,6 +1,6 @@
 # eslint-config
 
-ESLint config used at Monogram.
+ESLint config used at [Monogram](https://monogram.io/).
 
 ## Usage
 
@@ -20,16 +20,32 @@ Install dependencies
 pnpm add -D eslint @monogram/eslint-config
 ```
 
-Add the following to a `.eslintrc.js` file, while replacing `ENVIRONMENT` with the name of a supported environment
+Depending on your project, add the following to a `.eslintrc.js` file:
+
+#### Node.js rules
 
 ```js
 module.exports = {
-	extends: ['@monogram/eslint-config/<ENVIRONMENT>']
+	extends: '@monogram/eslint-config/node'
 }
 ```
 
-## Supported Environments
+_[See the rules](./node.js)_
 
-- [Node.js]("./node.js")
-- [Next.js]("./next.js")
-- Svelte _(coming soon)_
+#### Next.js rules
+
+```js
+module.exports = {
+	extends: '@monogram/eslint-config/next'
+}
+```
+
+_[See the rules](./next.js)_
+
+#### Svelte
+
+_coming soon_
+
+#### Astro
+
+_coming soon_
