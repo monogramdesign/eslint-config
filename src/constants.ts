@@ -4,7 +4,7 @@ export const PACKAGE_NAME = '@monogram/eslint-config'
 
 export const ESLINT_FILENAME = '.eslintrc.js'
 
-export const AVAILABLE_CONFIGS = ['next', 'node'] as const
+export const AVAILABLE_CONFIGS = { next: 'Next.js', node: 'Node.js' } as const
 
 export const PACKAGE_MANAGERS = ['yarn', 'pnpm', 'npm'] as const
 
