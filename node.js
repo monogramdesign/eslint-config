@@ -18,6 +18,7 @@ module.exports = {
 		'prettier'
 	],
 	rules: {
+		'no-restricted-syntax': ['error', 'ForInStatement', 'LabeledStatement', 'WithStatement'],
 		indent: 'off',
 		'@typescript-eslint/consistent-type-imports': 'error',
 		'no-use-before-define': 'off',
