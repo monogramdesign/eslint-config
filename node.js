@@ -1,4 +1,4 @@
-const config = {
+module.exports = {
 	parser: '@typescript-eslint/parser',
 	plugins: ['@typescript-eslint', 'import'],
 	settings: {
@@ -18,7 +18,9 @@ const config = {
 		'prettier'
 	],
 	rules: {
+		'no-restricted-syntax': ['error', 'ForInStatement', 'LabeledStatement', 'WithStatement'],
 		indent: 'off',
+		'@typescript-eslint/consistent-type-imports': 'error',
 		'no-use-before-define': 'off',
 		'no-else-return': [
 			'error',
@@ -26,8 +28,7 @@ const config = {
 				allowElseIf: true
 			}
 		],
-		'import/extensions': 'off'
+		'import/extensions': 'off',
+		'import/prefer-default-export': 'off'
 	}
 }
-
-export default config

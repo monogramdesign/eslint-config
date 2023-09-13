@@ -1,26 +1,16 @@
 #!/usr/bin/env node
-import { writeFileSync } from 'fs'
-import { question, fileExists, exec, ESLINT_FILENAME } from './utils'
-import { configs, availableConfigs, type AvailableConfig } from './configs'
-import {
-	packageManagers,
-	type PackageManager,
-	installPrefixes,
-	findPackageManager
-} from './package-managers'
+import { existsSync, writeFileSync } from 'node:fs'
+import { execSync } from 'node:child_process'
+import { select, confirm } from '@inquirer/prompts'
 
-const configFileAlreadyExists = fileExists(`${process.cwd()}/${ESLINT_FILENAME}`)
+import { AVAILABLE_CONFIGS, ESLINT_FILENAME, PACKAGE_NAME, INSTALL_PREFIXES } from './constants'
+import { choosePackageManager } from './package-manager'
 
-// check if ESLint file already exists to prevent unwanted overwrites
-if (configFileAlreadyExists) {
-	question(`\nDo you want to replace the current ${ESLINT_FILENAME} file? \n[y,n] `).then(
-		(answer) => {
-			const shouldReplaceCurrentConfig = answer?.toLowerCase() === 'y'
+import type { AvailableConfig, AvailableConfigEntries, PackageManager } from './types'
 
-			if (shouldReplaceCurrentConfig) {
-				handleCreate()
-			}
-		}
+if (existsSync(`${process.cwd()}/${ESLINT_FILENAME}`)) {
+	confirm({ message: `Do you want to replace the current ${ESLINT_FILENAME} file?` }).then(
+		(yes) => yes && handleCreate()
 	)
 } else {
 	handleCreate()
@@ -28,96 +18,46 @@ if (configFileAlreadyExists) {
 
 async function handleCreate() {
 	const config = await chooseConfig()
+	const packageManager = await choosePackageManager()
 
-	if (config) {
-		const packageManager = await choosePackageManager()
-
-		if (packageManager) {
-			createESLintConfig(config)
-			await installDependencies(config, packageManager)
-		} else {
-			console.log(`❌ Package manager not available`)
-		}
-	} else {
-		console.log(`❌ Configuration not available`)
-	}
+	await installDependency(packageManager)
+	createESLintConfig(config)
 }
 
-async function chooseConfig(): Promise<AvailableConfig | null> {
-	let config: AvailableConfig | null = null
+async function chooseConfig(): Promise<AvailableConfig> {
+	return select({
+		message: 'Which ESLint configuration do you want to install?',
+		choices: Object.entries(AVAILABLE_CONFIGS).map(([value, name]: AvailableConfigEntries) => ({
+			value,
+			name
+		}))
+	})
+}
 
-	const configOptions = availableConfigs.join(', ')
+async function installDependency(packageManager: PackageManager) {
+	const installPrefix = INSTALL_PREFIXES[packageManager]
 
-	const chosenConfig = await question(
-		`\nWhich ESLint configuration do you want to install? \n[${configOptions}] `
-	)
+	const installCommand = `${installPrefix} eslint ${PACKAGE_NAME}`
 
-	if (availableConfigs.includes(chosenConfig as AvailableConfig)) {
-		config = chosenConfig as AvailableConfig
-	} else {
-		config = chosenConfig as AvailableConfig
+	console.log(`📦 Installing dependencies...`)
+
+	try {
+		execSync(installCommand)
+	} catch (error) {
+		console.error(error)
 	}
-
-	return config
 }
 
 function createESLintConfig(whichConfig: AvailableConfig) {
-	const { config } = configs[whichConfig]
-
 	const dataAsString = JSON.stringify(
-		config,
+		{
+			extends: `${PACKAGE_NAME}/${whichConfig}`
+		},
 		null,
-		2 // TODO: get config from prettier
+		2
 	)
 
 	writeFileSync(`${process.cwd()}/${ESLINT_FILENAME}`, `module.exports = ${dataAsString}`)
 
 	console.log(`✅ ESLint configuration file created at ${process.cwd()}/${ESLINT_FILENAME}`)
-}
-
-async function choosePackageManager() {
-	let packageManager = findPackageManager()
-
-	if (packageManager) {
-		console.log(`\n📦 An existing ${packageManager} installation was found`)
-	} else {
-		const packageManagersOptions = packageManagers.join(', ')
-
-		const chosenManager = await question(
-			`Which package manager should be used? \n[${packageManagersOptions}] `
-		)
-
-		if (packageManagersOptions.includes(chosenManager as PackageManager)) {
-			packageManager = chosenManager as PackageManager
-		}
-	}
-
-	return packageManager
-}
-
-async function installDependencies(config: AvailableConfig, packageManager: PackageManager) {
-	const installPrefix = installPrefixes[packageManager]
-
-	const { dependencies } = configs[config]
-	const dependenciesAsString = dependencies.join(' ')
-
-	const installCommand = `${installPrefix} ${dependenciesAsString}`
-
-	console.log(`📦 Installing dependencies...`)
-	console.log(`${installCommand}\n`)
-
-	await exec(
-		installCommand,
-		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-		// @ts-ignore
-		(stdout: string, stderr: string) => {
-			if (stderr) {
-				console.error(stderr)
-			} else {
-				console.log(stdout)
-			}
-
-			Promise.resolve({ stdout, stderr })
-		}
-	)
 }
