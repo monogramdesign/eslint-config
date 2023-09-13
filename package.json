@@ -9,7 +9,6 @@
 	],
 	"license": "MIT",
 	"scripts": {
-		"postinstall": "pnpm build",
 		"build": "tsc",
 		"lint": "eslint",
 		"prepublish": "pnpm build && pnpm release",
