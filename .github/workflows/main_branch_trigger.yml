@@ -13,8 +13,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Setup project
-        uses: ./.github/custom-actions/setup-project/action.yml
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Install pnpm
+        run: curl -L https://unpkg.com/@pnpm/self-installer | node
+      - name: Install dependencies
+        run: pnpm install
+
       - name: Build step
         run: pnpm build
 
@@ -22,8 +27,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Setup project
-        uses: ./.github/custom-actions/setup-project/action.yml
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Install pnpm
+        run: curl -L https://unpkg.com/@pnpm/self-installer | node
+      - name: Install dependencies
+        run: pnpm install
+
       - name: Lint step
         run: pnpm lint
       - name: Format step
