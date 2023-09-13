@@ -15,8 +15,8 @@
 		"release": "standard-version",
 		"prepare": "husky install"
 	},
-	"main": "./dist/index.js",
-	"bin": "./dist/index.js",
+	"main": "dist/index.js",
+	"bin": "dist/index.js",
 	"files": [
 		"dist",
 		"next.js",
