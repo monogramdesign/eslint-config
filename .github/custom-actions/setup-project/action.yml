@@ -1,0 +1,12 @@
+name: 'Setup Project'
+description: 'Checkout, install pnpm, install dependencies'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Install pnpm
+      run: curl -L https://unpkg.com/@pnpm/self-installer | node
+    - name: Install dependencies
+      run: pnpm install

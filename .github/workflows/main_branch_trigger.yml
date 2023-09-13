@@ -9,21 +9,22 @@ on:
       - main
 
 jobs:
-  main_branch_job:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Install pnpm
-        run: curl -L https://unpkg.com/@pnpm/self-installer | node
-
-      - name: Install dependencies
-        run: pnpm install
-
+      - name: Setup project
+        uses: ./.github/custom-actions/setup-project
       - name: Build step
         run: pnpm build
 
+  lint-and-format:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Setup project
+        uses: ./.github/custom-actions/setup-project
       - name: Lint step
         run: pnpm lint
+      - name: Format step
+        run: pnpm dlx prettier --check "**/*.{js,ts}"
