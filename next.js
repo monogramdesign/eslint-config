@@ -1,3 +1,4 @@
+/** @type {import('eslint').ESLint.ConfigData} */
 module.exports = {
 	parser: '@typescript-eslint/parser',
 	plugins: ['@typescript-eslint', 'import'],
@@ -7,7 +8,7 @@ module.exports = {
 		},
 		'import/resolver': {
 			typescript: {
-				alwaysTryTypes: true // always try to resolve types under `<root>@types` directory even it doesn't contain any source code, like `@types/unist`
+				alwaysTryTypes: true
 			}
 		}
 	},
@@ -28,6 +29,7 @@ module.exports = {
 			}
 		],
 		'import/extensions': 'off',
+		'import/prefer-default-export': 'off',
 		'@typescript-eslint/ban-ts-comment': 'off',
 		'react/jsx-filename-extension': [1, { extensions: ['.tsx'] }],
 		'react/jsx-props-no-spreading': 'off',
