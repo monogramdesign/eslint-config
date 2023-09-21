@@ -42,7 +42,7 @@ async function installDependency(packageManager: PackageManager) {
 	console.log(`📦 Installing dependencies...`)
 
 	try {
-		execSync(installCommand)
+		execSync(installCommand, { stdio: 'inherit' })
 	} catch (error) {
 		console.error(error)
 	}
