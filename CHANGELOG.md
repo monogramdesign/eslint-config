@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.5](https://github.com/monogramdesign/eslint-config/compare/v0.1.4...v0.1.5) (2024-02-22)
+
+
+### Bug Fixes
+
+* upgrade packages ([#15](https://github.com/monogramdesign/eslint-config/issues/15)) ([c533360](https://github.com/monogramdesign/eslint-config/commit/c5333608a877077b51d706fd8aa041270f9413f8))
+
 ### [0.1.4](https://github.com/monogramdesign/eslint-config/compare/v0.1.3...v0.1.4) (2023-09-21)
 
 
