@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.6](https://github.com/monogramdesign/eslint-config/compare/v0.1.5...v0.1.6) (2025-02-20)
+
+
+### Features
+
+* disable 'radix' eslint rule ([e46fcbe](https://github.com/monogramdesign/eslint-config/commit/e46fcbe89160a1a69cbd50bae5d06f422c5343f7))
+* support bun ([3a25ddc](https://github.com/monogramdesign/eslint-config/commit/3a25ddcd7de92fb27b31646a659486f6e23adc04))
+
+
+### Chore
+
+* stick to eslint 8 ([876f0f7](https://github.com/monogramdesign/eslint-config/commit/876f0f77110e0bf92eb872fa9caaca4f2c351195))
+* update pnpm lockfile version ([20a7d32](https://github.com/monogramdesign/eslint-config/commit/20a7d3271aebe1cebb6d9ed145272e20006b3b0d))
+* use cjs in generated config file ([8c5d954](https://github.com/monogramdesign/eslint-config/commit/8c5d954545ea170410fd4fd6471242e0ddaf3994))
+
 ### [0.1.5](https://github.com/monogramdesign/eslint-config/compare/v0.1.4...v0.1.5) (2024-02-22)
 
 
