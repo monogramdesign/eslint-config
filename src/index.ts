@@ -3,7 +3,13 @@ import { existsSync, writeFileSync } from 'node:fs'
 import { execSync } from 'node:child_process'
 import { select, confirm } from '@inquirer/prompts'
 
-import { AVAILABLE_CONFIGS, ESLINT_FILENAME, PACKAGE_NAME, INSTALL_PREFIXES } from './constants'
+import {
+	AVAILABLE_CONFIGS,
+	ESLINT_FILENAME,
+	PACKAGE_NAME,
+	INSTALL_PREFIXES,
+	ESLINT_VERSION
+} from './constants'
 import { choosePackageManager } from './package-manager'
 
 import type { AvailableConfig, AvailableConfigEntries, PackageManager } from './types'
@@ -37,7 +43,7 @@ async function chooseConfig(): Promise<AvailableConfig> {
 async function installDependency(packageManager: PackageManager) {
 	const installPrefix = INSTALL_PREFIXES[packageManager]
 
-	const installCommand = `${installPrefix} eslint ${PACKAGE_NAME}`
+	const installCommand = `${installPrefix} eslint@${ESLINT_VERSION} ${PACKAGE_NAME}`
 
 	console.log(`📦 Installing dependencies...`)
 

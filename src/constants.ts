@@ -1,7 +1,7 @@
 import type { PackageManagerRecord } from './types'
 
 export const PACKAGE_NAME = '@monogram/eslint-config'
-
+export const ESLINT_VERSION = '^8.0.0'
 export const ESLINT_FILENAME = '.eslintrc.js'
 
 export const AVAILABLE_CONFIGS = { next: 'Next.js', node: 'Node.js' } as const
