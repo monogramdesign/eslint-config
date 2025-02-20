@@ -30,6 +30,7 @@ module.exports = {
 			}
 		],
 		'import/extensions': 'off',
-		'import/prefer-default-export': 'off'
+		'import/prefer-default-export': 'off',
+		radix: 'off'
 	}
 }
