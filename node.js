@@ -13,7 +13,6 @@ module.exports = {
 		}
 	},
 	extends: [
-		'airbnb-base',
 		'eslint:recommended',
 		'plugin:@typescript-eslint/recommended',
 		'prettier'
